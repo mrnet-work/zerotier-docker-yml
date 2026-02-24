@@ -1,0 +1,25 @@
+# docker-compose.yml - ZeroTier in container (network ID passed via env at runtime)
+# https://github.com/mrnet-work/zerotier-docker-yml
+
+services:
+  zerotier:
+    image: zerotier/zerotier:latest
+    container_name: zerotier-one
+    restart: unless-stopped
+    network_mode: host
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    volumes:
+      - zt-state:/var/lib/zerotier-one
+    environment:
+      # Must be provided at runtime (via --env-file, .env, or Ansible/docker compose env)
+      # Example: ZEROTIER_NETWORKS=xxxx docker compose up -d
+      # or use .env file: ZEROTIER_NETWORKS=your_id_here
+      ZEROTIER_NETWORKS: "${ZEROTIER_NETWORKS:-}"
+
+volumes:
+  zt-state:
