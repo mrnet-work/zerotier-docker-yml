@@ -1,6 +1,6 @@
 # docker-compose.yml - ZeroTier container
 # Network ID is injected by Ansible via command override
-# DO NOT add the network ID here - keep this file generic/public
+# KEEP THIS FILE GENERIC - NO SECRETS
 
 services:
   zerotier:
@@ -17,7 +17,7 @@ services:
     volumes:
       - zt-state:/var/lib/zerotier-one
     # Ansible will add/override the command line below
-    # Example of what Ansible injects:
+    # Example injected command (do not set here):
     # command: sh -c "zerotier-one -d && sleep 5 && zerotier-cli join YOUR_ID && tail -f /dev/null"
 
 volumes:
