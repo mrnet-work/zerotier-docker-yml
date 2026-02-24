@@ -1,6 +1,4 @@
-# docker-compose.yml
-# Generic ZeroTier container - network ID injected by Ansible at runtime
-# https://github.com/mrnet-work/zerotier-docker-yml
+# docker-compose.yml - ZeroTier container (generic - network ID injected by Ansible)
 
 services:
   zerotier:
@@ -16,9 +14,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     volumes:
       - zt-state:/var/lib/zerotier-one
-    # command: will be added/updated by Ansible (do not set here)
-    # Example of what Ansible will inject:
-    # command: sh -c "zerotier-one -d && sleep 5 && zerotier-cli join YOUR_ID && tail -f /dev/null"
+    # command: will be injected by Ansible (do not set here)
 
 volumes:
   zt-state:
