@@ -1,5 +1,5 @@
-# docker-compose.yml - ZeroTier container
-# Network ID injected by Ansible via command override
+# docker-compose.yml - ZeroTier container (generic template)
+# Network ID is injected by Ansible via command override
 
 services:
   zerotier:
@@ -15,7 +15,7 @@ services:
       - /dev/net/tun:/dev/net/tun
     volumes:
       - zt-state:/var/lib/zerotier-one
-    # command will be added/updated by Ansible
+    # Ansible will inject the command line here
 
 volumes:
   zt-state:
